@@ -1,17 +1,24 @@
-/* global jQuery, console, document */
+/* global jQuery, document */
 'use strict';
 
 (function($) {
+
     var defaults = {
         cyclic: false,
-        inputs: ':text',
+        inputs: ':text', // a jQuery selector
         keybindings: {
             next: 40,
-            prev: 38
-        }
+            prev: 38,
+            up: 38,
+            down: 40,
+            right: 39,
+            left: 37
+        },
+        direction: 'vector' // 'vector' or 'matrix'
     };
-    
+
     // Constructor //
+
     /**
      * Construct a new InputNavigation object.
      *
@@ -34,15 +41,42 @@
 
         // Bind events.
 
+        // Unbind previous events.
+        self.$container.off('.input-navigation');
+
         // Handle input elements navigation by keybindings.
         self.$container.on('keydown.input-navigation.navigation', self.$options.inputs, function(event) {
-            console.log(event.which);
-            if (event.which === self.$options.keybindings.next) {
-                event.preventDefault();
-                self.next();
-            } else if (event.which === self.$options.keybindings.prev) {
-                event.preventDefault();
-                self.prev();
+            var dir = self.$options.direction;
+            switch (dir) {
+                case 'vector':
+                    if (event.which === self.$options.keybindings.next) {
+                        event.preventDefault();
+                        self.next();
+                    } else if (event.which === self.$options.keybindings.prev) {
+                        event.preventDefault();
+                        self.prev();
+                    }
+                    break;
+                case 'matrix':
+                    if (event.which === self.$options.keybindings.up) {
+                        event.preventDefault();
+                        self.up();
+                    }
+                    if (event.which === self.$options.keybindings.down) {
+                        event.preventDefault();
+                        self.down();
+                    }
+                    if (event.which === self.$options.keybindings.right) {
+                        event.preventDefault();
+                        self.right();
+                    }
+                    if (event.which === self.$options.keybindings.left) {
+                        event.preventDefault();
+                        self.left();
+                    }
+                    break;
+                default:
+                    makeError('Unknow direction option: ' + dir);
             }
         });
 
@@ -77,6 +111,34 @@
     };
 
     /**
+     * Navigate to up direction.
+     */
+    InputNavigation.prototype.up = function() {
+        // TODO implement me.
+    };
+
+    /**
+     * Navigate to down direction.
+     */
+    InputNavigation.prototype.down = function() {
+        // TODO implement me.
+    };
+
+    /**
+     * Navigate to right direction.
+     */
+    InputNavigation.prototype.right = function() {
+        // TODO implement me.
+    };
+
+    /**
+     * Navigate to left direction.
+     */
+    InputNavigation.prototype.left = function() {
+        // TODO implement me.
+    };
+
+    /**
      * Return the current focused element
      */
     InputNavigation.prototype.current = function() {
@@ -92,21 +154,28 @@
         return this.each(function() {
             var $this = $(this);
             var instance = $this.data('inputNavigation');
-            
+
             // Create or use existing instance.
             if (!instance || !(instance instanceof InputNavigation)) {
-                $this.data('inputNavigation', (instance = new InputNavigation(this, options || instance )));
+                $this.data('inputNavigation', (instance = new InputNavigation(this, options || instance)));
             }
             // Invoke method.
             if (typeof options === 'string' && $.isFunction(instance[options])) {
-                console.log(args);
                 instance[options].apply(instance, args);
             }
         });
     };
-    
-    $(document).on('ready.input-navigation.data-api', function(){
+
+    // Data API //
+
+    $(document).on('ready.input-navigation.data-api', function() {
         $('[data-input-navigation]').inputNavigation();
     });
-    
+
+    // Private functions //
+
+    function makeError(msg) {
+        throw new Error(msg);
+    }
+
 })(jQuery);

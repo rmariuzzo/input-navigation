@@ -90,7 +90,7 @@
      * Navigate to next input field.
      */
     InputNavigation.prototype.next = function() {
-        var $inputs = this.$container.find(this.$options.inputs);
+        var $inputs = this.inputs();
         var index = $inputs.index(this.current()) + 1;
         if (this.$options.cyclic && index === $inputs.length) {
             index = 0;
@@ -102,7 +102,7 @@
      * Navigate to previous input field.
      */
     InputNavigation.prototype.prev = function() {
-        var $inputs = this.$container.find(this.$options.inputs);
+        var $inputs = this.inputs();
         var index = $inputs.index(this.current()) - 1;
         if (this.$options.cyclic && index < 0) {
             index = $inputs.length - 1;
@@ -143,6 +143,31 @@
      */
     InputNavigation.prototype.current = function() {
         return this.$current || this.$container.find(':focus');
+    };
+
+    /**
+     * Get the matrix of input elements.
+     */
+    InputNavigation.prototype.matrix = function() {
+        var $inputs = this.inputs();
+        var matrix = $inputs.map(function() {
+            var $input = $(this);
+            return {
+                offset: $input.offset(),
+                dimension: {
+                    width: $input.outerWidth(),
+                    height: $input.outerHeight()
+                }
+            };
+        });
+        return matrix;
+    };
+
+    /**
+     * Return an array of inputs elements.
+     */
+    InputNavigation.prototype.inputs = function() {
+        return this.$container.find(this.$options.inputs);
     };
 
     // jQuery plugin definition //

@@ -166,8 +166,9 @@
     $.fn.inputNavigation = function(options) {
         // Store any extra arguments for later use.
         var args = Array.prototype.slice.call(arguments, 1);
+        var retValue;
 
-        return this.each(function() {
+        this.each(function() {
             var $this = $(this);
             var instance = $this.data('inputNavigation');
 
@@ -177,9 +178,12 @@
             }
             // Invoke method.
             if (typeof options === 'string' && $.isFunction(instance[options])) {
-                instance[options].apply(instance, args);
+                retValue = instance[options].apply(instance, args);
+                return false;
             }
         });
+
+        return retValue || this;
     };
 
     // Data API //

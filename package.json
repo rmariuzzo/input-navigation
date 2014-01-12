@@ -1,0 +1,27 @@
+{
+    "name": "jquery-input-navigation",
+    "version": "1.0.0",
+    "description": "Retro-like navigation trough input fields using arrow keys.",
+    "main": "Gruntfile.js",
+    "directories": {
+        "test": "test"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "grunt": "~0.4.2",
+        "grunt-contrib-jasmine": "~0.5.2",
+        "grunt-contrib-jshint": "~0.8.0"
+    },
+    "scripts": {
+        "test": "grunt jasmine"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mariuzzo/jquery-input-navigation.git"
+    },
+    "author": "Rubens Mariuzzo",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mariuzzo/jquery-input-navigation/issues"
+    }
+}

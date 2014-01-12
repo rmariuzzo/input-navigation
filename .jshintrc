@@ -16,5 +16,15 @@
     "trailing": true,
     "node": true,
     "strict": true,
-    "predef": ["_und", "require", "describe", "beforeEach", "it"]
+    "predef": ["_und", "require", "describe", "beforeEach", "it"],
+    "globals": {
+        "it": false,
+        "xit": false,
+        "describe": false,
+        "xdescribe": false,
+        "beforeEach": false,
+        "afterEach": false,
+        "expect": false,
+        "spyOn": false
+    }
 }

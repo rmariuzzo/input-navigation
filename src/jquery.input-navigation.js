@@ -146,21 +146,12 @@
     };
 
     /**
-     * Get the matrix of input elements.
+     * Get the offset of input elements.
      */
-    InputNavigation.prototype.matrix = function() {
-        var $inputs = this.inputs();
-        var matrix = $inputs.map(function() {
-            var $input = $(this);
-            return {
-                offset: $input.offset(),
-                dimension: {
-                    width: $input.outerWidth(),
-                    height: $input.outerHeight()
-                }
-            };
+    InputNavigation.prototype.offsets = function() {
+        return this.inputs().map(function() {
+            return $(this).offset();
         });
-        return matrix;
     };
 
     /**

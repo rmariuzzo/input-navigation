@@ -5,26 +5,26 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
             all: [
-                'Gruntfile.js', 'src/**/*.js', 'spec/**/*.js'
+                'Gruntfile.js', 'src/**/*.js', 'test/**/*.js'
             ],
             options: {
                 jshintrc: '.jshintrc'
             },
         },
-        jasmine: {
-            src: 'src/**/*.js',
-            options: {
-                specs: 'spec/**/*.js',
-                vendor: [
-                    'bower_components/jquery/jquery.js'
-                ]
-            }
-        }
+        mocha: {
+            test: {
+                src: ['test/**/*.html'],
+                options: {
+                    run: true,
+                    log: true
+                }
+            },
+        },
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-mocha');
 
-    grunt.registerTask('test', ['jshint', 'jasmine']);
+    grunt.registerTask('test', ['jshint', 'mocha']);
     grunt.registerTask('default', ['test']);
 };

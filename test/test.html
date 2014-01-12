@@ -1,34 +1,34 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>jQuery Input Navigation test</title>
-	<script src="../bower_components/jquery/jquery.js"></script>
-	<script src="../src/jquery.input-navigation.js"></script>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Example Mocha Test</title>
+    <link rel="stylesheet" href="../node_modules/grunt-mocha/node_modules/mocha/mocha.css" type="text/css" charset="utf-8" />
 </head>
 <body>
-	<!-- In order for the browser to parse this automatically, it must be a well-formed JSON -->
-    <form data-input-navigation='{"cyclic": "true"}'>
-		<input type="text" value="value 1">
-        <br>
-		<input type="text" value="value 2">
-        <br>
-		<input type="text" value="value 3">
-        <br>
-		<input type="text" value="value 4">
-        <br>
-		<input type="text" value="value 5">
-        <br>
-		<input type="text" value="value 6">
-        <br>
-		<input type="text" value="value 7">
-        <br>
-		<input type="text" value="value 8">
-        <br>
-		<input type="text" value="value 9">
-        <br>
-		<input type="text" value="value 10">
-        <br>
-	</form>
+    <div id="mocha"></div>
+    <script src="../node_modules/grunt-mocha/node_modules/mocha/mocha.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        mocha.setup('bdd');
+    </script>
+
+    <script src="../node_modules/chai/chai.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        var expect = chai.expect;
+    </script>
+
+    <script src="../src/jquery.input-navigation.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- Spec files -->
+    <script src="spec/methods.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- run mocha -->
+    <script type="text/javascript" charset="utf-8">
+        // If tests run in a real browser
+        // Can alternatively do a check on window.PHANTOMJS
+        if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+            mocha.run();
+        }
+    </script>
 </body>
 </html>
